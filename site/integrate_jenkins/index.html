@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <title>Cordova持续集成－Jenkins配置 - HAC 混合应用开发教程</title>
+  
+
+  <link rel="shortcut icon" href="../img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Cordova持续集成－Jenkins配置";
+    var mkdocs_page_input_path = "integrate_jenkins.md";
+    var mkdocs_page_url = "/integrate_jenkins/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script>
+  <script src="../js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../buildEnv/" class="icon icon-home"> HAC 混合应用开发教程</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../buildEnv/">Cordova环境搭建</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../getStart/">Cordova入门</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../direction/">Cordova目录结构</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../config/">Cordova配置文件</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../plugin/">Cordova插件</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../autoBuild/">Cordova自动化打包</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../integrate_env/">Cordova持续集成－环境的搭建</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../integrate_init/">Cordova持续集成－项目初始化</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Cordova持续集成－Jenkins配置</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#jenkins">一 jenkins介绍以及准备</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#_1">二 新建任务</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#_2">三 参数化构建</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#_3">四 配置构建项</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#_4">五 配置下载文件位置</a></li>
+                
+            
+            </ul>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../integrate_build/">Cordova持续集成－开始构建</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../integrate_grunt/">Cordova持续集成－修改grunt任务</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="..">关于WIKI</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../moreinfo/">更多</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../contact/">联系我们</a>
+        
+    </li>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../buildEnv/">HAC 混合应用开发教程</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../buildEnv/">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Cordova持续集成－Jenkins配置</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="jenkins">一 jenkins介绍以及准备</h2>
+<p>我们可以利用jenkins＋docker完成持续集成。如果说docker是基础，jenkins就像是灵魂。</p>
+<p>准备工作，在前端项目中要有：
+1. 相关的cordova配置文件－config.xml
+2. 相关的签名文件
+3. 修改config.xml中版本号为模版{version},如下</p>
+<pre><code>&lt;widget id=&quot;com.XXX.XXX&quot; version=&quot;{version}&quot; xmlns=&quot;http://www.w3.org/ns/widgets&quot; xmlns:cdv=&quot;http://cordova.apache.org/ns/1.0&quot;&gt;
+</code></pre>
+
+<h2 id="_1">二 新建任务</h2>
+<ol>
+<li>点击新建
+<img alt="3-1.png" src="../resources/3-1.png" /></li>
+<li>输入项目名，选择构建一个自由风格的软件项目
+<img alt="3-2.png" src="../resources/3-2.jpg" /></li>
+</ol>
+<h2 id="_2">三 参数化构建</h2>
+<ol>
+<li>选择参数化构建过程，允许灵活构建
+<img alt="3-3.png" src="../resources/3-3.png" /></li>
+<li>新增参数
+<img alt="3-4.png" src="../resources/3-4.png" /></li>
+<li>设置应用版本号
+示例：</li>
+</ol>
+<pre><code>version
+0.0.0
+应用版本号（数字.数字.数字）
+</code></pre>
+
+<p><img alt="3-5.png" src="../resources/3-5.png" />
+4. 设置grunt构建命令</p>
+<pre><code>command
+build
+grunt 构建命令
+</code></pre>
+
+<p><img alt="3-6.png" src="../resources/3-6.png" />
+5. 设置svn路径</p>
+<pre><code>svnPath
+http://XX.XX.XX.XX/svn/VIS/VISAPP/branches/dev
+项目svn路径
+</code></pre>
+
+<p><img alt="3-7.png" src="../resources/3-7.png" /></p>
+<h2 id="_3">四 配置构建项</h2>
+<ol>
+<li>点击增加构建步骤
+<img alt="3-8.png" src="../resources/3-8.png" /></li>
+<li>配置构建脚本
+构建脚本有两种：
+第一是测试脚本，不需要配置签名
+示例：</li>
+</ol>
+<pre><code>docker exec -i cordova /data/build.sh $svnPath $command XXXX XXXXCordova buildConfig/cordova/android/test/config.xml $version
+</code></pre>
+
+<p><img alt="3-9.png" src="../resources/3-9.png" />
+第二是正式脚本，需要配置签名
+示例：</p>
+<pre><code>docker exec -i cordova /data/build.sh $svnPath $command XXXX XXXXCordova buildConfig/cordova/android/test/config.xml $version buildConfig/keyStore/android/formal/my-release-key.keystore android-armv7-release-unsigned.apk XXXX alias_name
+</code></pre>
+
+<p><img alt="3-10.png" src="../resources/3-10.png" />
+3. 配置拷贝生成结果脚本
+示例：</p>
+<pre><code>docker cp cordova:/data/XXXXCordova/platforms/android/build/outputs/apk/android-armv7-debug.apk build.apk
+docker cp build.apk myjenkins:/var/jenkins_home/workspace/XXXX/build.apk
+</code></pre>
+
+<p><img alt="3-11.png" src="../resources/3-11.png" /></p>
+<h2 id="_4">五 配置下载文件位置</h2>
+<ol>
+<li>增加构建后操作步骤
+<img alt="3-12.png" src="../resources/3-12.png" /></li>
+<li>配置下载文件位置（相对于任务工作目录的路径）
+<img alt="3-13.png" src="../resources/3-13.png" /></li>
+<li>最后，点击保存即可</li>
+</ol>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../integrate_build/" class="btn btn-neutral float-right" title="Cordova持续集成－开始构建">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../integrate_init/" class="btn btn-neutral" title="Cordova持续集成－项目初始化"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../integrate_init/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../integrate_build/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>
